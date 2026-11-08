@@ -5017,7 +5017,7 @@ h1, h2, .section-title { font-size: 28px; } h3, .modal-title, .pesq-titulo { fon
 .bib-capa-g { width: 55%; margin: 0 auto; aspect-ratio: 2 / 3; border: 2px solid #261363; border-radius: 12px; overflow: hidden; box-shadow: 5px 5px 0 #261363; background: #FFE0CC; display: flex; align-items: center; justify-content: center; font-size: 56px; }
 .bib-autor { font-size: 14px; color: #3F2F78; font-weight: 600; margin: 2px 0 10px; }
 .bib-tema { background: #19C6B7; color: #261363; font-weight: 800; font-size: 12px; padding: 2px 8px; border-radius: 999px; }
-.bib-frase { font-style: italic; font-size: 14px; line-height: 1.55; color: #3F2F78; margin: 0 0 16px; }
+.bib-frase { white-space: pre-line; font-style: italic; font-size: 14px; line-height: 1.55; color: #3F2F78; margin: 0 0 16px; }
 .bib-status { border: 2px solid #261363; border-radius: 14px; padding: 12px; font-weight: 700; font-size: 14px; }
 .bib-status.ok { background: #D6F5F1; } .bib-status.off { background: #FFE0CC; }
 .bib-foto-up { display: block; border: 2px dashed #261363; border-radius: 14px; padding: 14px; text-align: center; font-weight: 700; font-size: 14px; cursor: pointer; background: #FFF7EE; color: #261363; }
@@ -7691,7 +7691,7 @@ function renderTabBiblioteca() {
         <label class="pass-lab">Título</label><input id="bib-titulo" class="pesq-campo" type="text" maxlength="80" value="${escapeHtml(l ? l.titulo : '')}">
         <label class="pass-lab">Autor</label><input id="bib-autor" class="pesq-campo" type="text" maxlength="60" value="${escapeHtml(l ? l.autor : '')}">
         <label class="pass-lab">Tema <span style="font-weight:400;">(fé, propósito, relacionamentos...)</span></label><input id="bib-tema" class="pesq-campo" type="text" maxlength="24" value="${escapeHtml(l ? l.tema || '' : '')}">
-        <label class="pass-lab">Por que vale ler <span style="font-weight:400;">(uma frase)</span></label><input id="bib-frase" class="pesq-campo" type="text" maxlength="120" value="${escapeHtml(l ? l.frase || '' : '')}">
+        <label class="pass-lab">Por que vale ler <span style="font-weight:400;">(conte em poucas linhas)</span></label><textarea id="bib-frase" class="pesq-campo" rows="4" maxlength="500" placeholder="Conte o que o livro ensina e por que vale a pena ler...">${escapeHtml(l ? l.frase || '' : '')}</textarea>
         <button class="btn btn-primary w-full" style="margin-top:14px;" ${State.processando ? 'disabled' : ''} data-action="bib-salvar">${State.processando ? 'Salvando...' : (l ? 'Salvar alterações' : 'Adicionar à estante')}</button>
         ${l ? `<button class="sem-link" style="margin-top:8px;" data-action="bib-cancelar-edicao">cancelar edição</button>` : ''}
       </div>
