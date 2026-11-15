@@ -5117,6 +5117,11 @@ h1, h2, .section-title { font-size: 28px; } h3, .modal-title, .pesq-titulo { fon
 /* ===== v11.5 — Biblioteca: capas e textos alinhados (título 2 linhas, autor 1 linha) ===== */
 .bib-livro b { display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; min-height: 2.4em; }
 .bib-livro small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+
+/* v11.6 filtros da biblioteca em uma linha */
+.bib-chips { display: flex !important; flex-wrap: nowrap !important; gap: 8px; overflow-x: auto; margin: 0 -4px 12px; padding: 2px 4px 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.bib-chips::-webkit-scrollbar { display: none; }
+.bib-chips .pesq-chip { flex: 0 0 auto; white-space: nowrap; padding: 6px 14px !important; font-size: 14px !important; min-height: 0 !important; }
 </style>
 </head>
 <body>
@@ -7682,7 +7687,7 @@ function renderModalBiblioteca() {
         ${x}
         <h3 class="pesq-titulo">Biblioteca DEEP 📚</h3>
         <p class="pesq-sub" style="margin:4px 0 12px;">Livros que valem a leitura. Escolha um e peça emprestado.</p>
-        ${temas.length ? `<div class="pesq-chips" style="margin-bottom:12px;"><button class="pesq-chip ${!filtro ? 'sel' : ''}" data-action="bib-tema" data-value="">Todos</button>${temas.map(t => `<button class="pesq-chip ${filtro === t ? 'sel' : ''}" data-action="bib-tema" data-value="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('')}</div>` : ''}
+        ${temas.length ? `<div class="pesq-chips bib-chips"><button class="pesq-chip ${!filtro ? 'sel' : ''}" data-action="bib-tema" data-value="">Todos</button>${temas.slice().sort((x, y) => (y === filtro) - (x === filtro)).map(t => `<button class="pesq-chip ${filtro === t ? 'sel' : ''}" data-action="bib-tema" data-value="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('')}</div>` : ''}
         ${lista.length === 0 ? '<div class="mur-vazio">A estante está sendo montada. Volte em breve! 📚</div>' : `<div class="bib-grade">${lista.map(l => `
           <button class="bib-livro ${l.emprestimo ? 'emp' : ''}" data-action="bib-abrir" data-id="${l.id}">
             <div class="bib-capa">${l.foto ? `<img src="${l.foto}" alt="">` : '<span>📘</span>'}${l.emprestimo ? '<i>emprestado</i>' : ''}</div>
